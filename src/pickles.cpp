@@ -129,6 +129,30 @@ int main() {
         }
     );
 
+     server.addHandler("POST", "/json",
+        [](struct mg_connection *connection, int ev, mg_http_message *ev_data, void *fn_data) {
+            char *buffer = new char[ev_data->body.len + 1];
+            strncpy(buffer, ev_data->body.ptr, ev_data->body.len);
+            buffer[ev_data->body.len] = '\0';
+            json j = json::parse(buffer);
+            int val = j.value("value", 0);
+            json res = {
+                { "plus", val + 20 },
+                { "minus", val - 69 },
+                { "plus_float", val + 3.14 },
+                { "list", { val, val * 2, val * 3.14 } },
+                { "object", {
+                    { "item1", val },
+                    { "item2", true },
+                    { "item3", val - 3.14 },
+                    { "anotherList", { val - 1, val - 2.5, "somestr", false, val } }
+                }}
+            };
+            mg_http_reply(connection, 200, NULL, res.dump().c_str());
+            delete buffer;
+        }
+    );
+
     signal(SIGINT,
         [](int signum) {
             printf("Exit signal caught! Shutting down...\n");
