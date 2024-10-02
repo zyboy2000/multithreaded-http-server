@@ -165,7 +165,14 @@ Args:       connection: Mongoose connection
 static void httpRequestDispatch(struct mg_connection *connection, int ev, void *ev_data, void *fn_data) {
     RESTserver *ptrToClass = ((dispatcherInfo *)fn_data)->ptrToClass;   // Obtain a pointer to the corresponding class
 
-    if (ev == MG_EV_HTTP_MSG) {
+     if (ev == MG_EV_ACCEPT) {
+    struct mg_tls_opts opts = {
+        //.ca = "ca.pem",         // Uncomment to enable two-way SSL
+        .cert = "server.pem",     // Certificate PEM file
+        .certkey = "server.pem",  // This pem contains both cert and key
+    };
+    mg_tls_init(connection, &opts);
+  } else if(ev == MG_EV_HTTP_MSG) {
         // Handle HTTP request
         struct mg_http_message *httpMsg = (struct mg_http_message *)ev_data;
 

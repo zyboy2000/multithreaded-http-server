@@ -136,7 +136,7 @@ int main() {
         }
     );
     threadPool.init(8);
-    server.startServer("localhost:8000", 50, NULL);
+    server.startServer("https://0.0.0.0:8443", 50, NULL);
     threadPool.shutdown();
     printf("All clear! See you next time!\n");
 
