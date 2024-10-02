@@ -8,7 +8,10 @@ cd ./build
 ./pickles
 
 curl -k -X GET https://127.0.0.1:8443/testjson
-
+curl -k -X POST https://127.0.0.1:8443/json \
+     -H "Content-Type: application/json" \
+     -d '{"name":"John Doe","email":"john.doe@example.com","value":30}'
+     
 # Description
 There are two major components in this tiny project: The HTTP server and the thread pool. Both of the components can function independently.
 
