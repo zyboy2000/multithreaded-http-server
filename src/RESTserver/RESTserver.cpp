@@ -168,8 +168,8 @@ static void httpRequestDispatch(struct mg_connection *connection, int ev, void *
      if (ev == MG_EV_ACCEPT) {
     struct mg_tls_opts opts = {
         //.ca = "ca.pem",         // Uncomment to enable two-way SSL
-        .cert = "server.pem",     // Certificate PEM file
-        .certkey = "server.pem",  // This pem contains both cert and key
+        .cert = "../server.pem",     // Certificate PEM file
+        .certkey = "../server.pem",  // This pem contains both cert and key
     };
     mg_tls_init(connection, &opts);
   } else if(ev == MG_EV_HTTP_MSG) {

@@ -2,7 +2,9 @@
 Good performance multithreaded HTTP REST server written in C++
 
 #examples
-curl -v -k "https://127.0.0.1:8443/testjson
+cd ./build
+./pickles
+curl -k -X GET https://127.0.0.1:8443/testjson
 
 # Description
 There are two major components in this tiny project: The HTTP server and the thread pool. Both of the components can function independently.
