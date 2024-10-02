@@ -2,8 +2,11 @@
 Good performance multithreaded HTTP REST server written in C++
 
 #examples
+
 cd ./build
+
 ./pickles
+
 curl -k -X GET https://127.0.0.1:8443/testjson
 
 # Description
